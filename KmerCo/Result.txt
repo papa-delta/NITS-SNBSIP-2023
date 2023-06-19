@@ -1,0 +1,48 @@
+
+
+########### Results of dataset sequence.txt without write (Canonical) ############
+Kmer length: 28
+Total kmers: 41563320
+Total insertion: 41563320
+Elapsed Time of insertion: 18.062616
+Required memory size in bits and MB: 152169152	 18.139977
+Required memory size in bits: 597580272	 71.237120
+
+
+########### Results of dataset sequence.txt with write (Canonical) ############
+Kmer length: 28
+Total kmers: 41563320
+Total insertion: 41563320
+Elapsed Time of insertion: 27.392072
+Required memory size in bits and MB: 152169152	 18.139977
+Required memory size in bits and MB: 597580272	 71.237120
+
+Elapsed Time of query: 13.502110
+Total queries: 21739945
+Total number of distinct kmers: 22125598
+Total number of erroneous kmers: 21043944
+Total number of trustworthy kmers: 696002
+
+
+########### Results of dataset sequence1.txt without write (Canonical) ############
+Kmer length: 28
+Total kmers: 41563320
+Total insertion: 41563320
+Elapsed Time of insertion: 18.024610
+Required memory size in bits and MB: 152169152	 18.139977
+Required memory size in bits: 597580272	 71.237120
+
+
+########### Results of dataset sequence1.txt with write (Canonical) ############
+Kmer length: 28
+Total kmers: 41563320
+Total insertion: 41563320
+Elapsed Time of insertion: 27.275722
+Required memory size in bits and MB: 152169152	 18.139977
+Required memory size in bits and MB: 597580272	 71.237120
+
+Elapsed Time of query: 12.848310
+Total queries: 21623244
+Total number of distinct kmers: 22009068
+Total number of erroneous kmers: 20880795
+Total number of trustworthy kmers: 742450
