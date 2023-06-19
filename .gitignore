@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+#Very Large Files
+loxodonta.cor.fq
+Distinct.txt
+Errorneous.txt
+
