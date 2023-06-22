@@ -52,6 +52,7 @@ unsigned int murmur2 ( const void * key, int len, unsigned int seed )
 	return h;
 } 
 
+/*
 unsigned int murmur_backup2 ( const void * key, int len, unsigned int seed )
 {
 	// 'm' and 'r' are mixing constants generated offline.
@@ -103,3 +104,4 @@ unsigned int murmur_backup2 ( const void * key, int len, unsigned int seed )
 	return h;
 } 
 
+*/

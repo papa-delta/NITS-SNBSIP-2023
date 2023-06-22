@@ -9,6 +9,8 @@
 #include "initBF.h"
 #include <sys/mman.h>
 #include<fcntl.h>
+#include "robustBF.c"
+
 
 static unsigned long int TP=0,TN=0,FP=0;
 
