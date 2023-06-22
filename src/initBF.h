@@ -1,3 +1,7 @@
+#include <math.h>
+#include "prime.h"
+#include "KmerCo.h"
+#include <stdio.h>
 
 unsigned long int size=0;
 
