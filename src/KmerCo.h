@@ -8,47 +8,18 @@
 //#include "mask/mask12.h"
 //#include "mask/mask14.h"
 //#include "mask/mask16.h"
-
+#include "common.h"
 #include "murmur.h"
 
-//#include "initCBF.h"
-static int x;
-static int y;
+//#include "initCBF.h" - commented out initially
+
 static unsigned long int nc=8; //total number of counters
 static unsigned long int bc=8; // total number bits per counters
-int seed[8]={7689571,15485863,104395303,49979693,67867967,141650939,870889,899939};
 
-void dim(int p, int q)
-{
-	x=p;
-	y=q;
-}
+// static int x; - commented because redundant
+// static int y;
+//int seed[8]={7689571,15485863,104395303,49979693,67867967,141650939,870889,899939};
 
-unsigned long int **allocate()
-{
-	int i,j,k;
-	unsigned long int **a=(unsigned long int **)malloc(x*sizeof(unsigned long int *));
-	if(a==NULL)
-	{
-		printf("Unable to allocate!\n");
-		return NULL;
-	}
-	
-	for(i=0;i<x;i++)
-	{
-		a[i]=(unsigned long int *)malloc(y*sizeof(unsigned long int));
-		if(a[i]==NULL)
-		{
-			printf("Unable to allocate!\n");
-			return NULL;
-		}
-	}
-	for(i=0;i<x;i++)
-		for(j=0;j<y;j++)
-			a[i][j]=0;
-	printf("\nAllocated and Initilized 2DBF Successfully...\n");
-	return a;
-}
 
 //Insertion function of KmerCo with only K-mer as input
 void _set_(unsigned long int **a,int kmer_len,char *kmer, int k)
@@ -182,10 +153,3 @@ unsigned long int _test_canonical_(unsigned long int **a,int kmer_len,char *kmer
 			return min;
 	}
 }
-
-void _free_(unsigned long int **a)
-{
-	free(a);
-	printf("\nMemory freed successfully...\n");
-}
-

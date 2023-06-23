@@ -9,41 +9,13 @@
 //int x=5647,y=6151;
 //int x2=1129,y2=1123;
 //int x2=179, y2=197;//275KB
-static int x,y;
+
+//static int x,y; - commented because redundant
+
+
+#include "common.h"
+
 static int bits=61;
-
-void dim(int p, int q)
-{
-	x=p;
-	y=q;
-}
-
-unsigned long int **allocate()
-{
-	int i,j,k;
-	unsigned long int **a=(unsigned long int **)malloc(x*sizeof(unsigned long int *));
-	if(a==NULL)
-	{
-		printf("Unable to allocate!\n");
-		return NULL;
-	}
-	
-	for(i=0;i<x;i++)
-	{
-		a[i]=(unsigned long int *)malloc(y*sizeof(unsigned long int));
-		if(a[i]==NULL)
-		{
-			printf("Unable to allocate!\n");
-			return NULL;
-		}
-	}
-	for(i=0;i<x;i++)
-		for(j=0;j<y;j++)
-			a[i][j]=0;
-	printf("\nAllocated and Initilized 2DBF Successfully...\n");
-	return a;
-}
-
 
 void _set_(unsigned long int **a,unsigned long int h)
 {
@@ -78,11 +50,5 @@ void _del_(unsigned long int **a,unsigned long int h)
 		a[i][j]=a[i][j]^p;
 }
 
-
-void _free_(unsigned long int **a)
-{
-	free(a);
-	printf("\nMemory freed successfully...\n");
-}
 
 
