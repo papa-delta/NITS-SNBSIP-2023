@@ -11,7 +11,7 @@
 
 #include "murmur.h"
 
-//#include "initBF.h"
+//#include "initCBF.h"
 static int x;
 static int y;
 static unsigned long int nc=8; //total number of counters

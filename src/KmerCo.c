@@ -4,13 +4,10 @@
 #include <string.h>
 #include <math.h>
 #include "prime.h"
-//#include "murmur.h"
 #include "KmerCo.h" //KmerCo header file
-#include "initBF.h"
+#include "initCBF.h"
 #include <sys/mman.h>
 #include<fcntl.h>
-#include "robustBF.c"
-
 
 static unsigned long int TP=0,TN=0,FP=0;
 

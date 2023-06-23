@@ -1,8 +1,3 @@
-#include <math.h>
-#include "prime.h"
-#include "2dfilter.h"
-#include <stdio.h>
-
 
 unsigned long int size=0;
 static int seed1, seed2,seed3,seed4,seed5;//,seed6, seed7, seed8,seed9,seed10;

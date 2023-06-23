@@ -6,7 +6,7 @@
 #include "prime.h"
 #include "murmur.h"
 #include "2dfilter.h"
-#include "initBF.h"
+#include "initRBF.h"
 #include "keyBF.h"
 
 static unsigned long int TP=0,TN=0;
