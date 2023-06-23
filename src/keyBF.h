@@ -1,13 +1,14 @@
-
+#include "murmur.h"
+#include "KmerCo.h"
 
 void insert_keyBF(unsigned long int **b2, char *buff, int i)
 {
 	
 	unsigned long int h1,h2,h3,h4,h5,h6,h7;
 
-	h1=murmur2(buff,i,seed1);
-	h2=murmur2(buff,i,seed2);
-	h3=murmur2(buff,i,seed3);
+	h1=murmur2(buff,i,seed[0]);
+	h2=murmur2(buff,i,seed[1]);
+	h3=murmur2(buff,i,seed[2]);
 	//h4=murmur2(buff,i,seed4);
 	//h5=murmur2(buff,i,seed5);
 	
@@ -24,9 +25,9 @@ int lookup_keyBF(unsigned long int **b2, char *buff, int i)
 {
 	unsigned long int h1,h2,h3,h4,h5,h6,h7;
 
-	h1=murmur2(buff,i,seed1);
-	h2=murmur2(buff,i,seed2);
-	h3=murmur2(buff,i,seed3);
+	h1=murmur2(buff,i,seed[0]);
+	h2=murmur2(buff,i,seed[1]);
+	h3=murmur2(buff,i,seed[2]);
 	//h4=murmur2(buff,i,seed4);
 	//h5=murmur2(buff,i,seed5);	
 	if(_test_(b2,h1)==1)

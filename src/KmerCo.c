@@ -15,6 +15,9 @@
 static unsigned long int TP=0,TN=0,FP=0;
 
 unsigned long int **aBF;
+unsigned long int **kBF2=allocate();
+unsigned long int **kBF1=allocate();
+unsigned long int **kBF3=allocate();
 
 //#### Insertion without file writing (Canonical) ##########
 void insertion_canonical_without_filewrite(char fname[6][100],int kmer_len,int threshold, int k){
@@ -227,10 +230,12 @@ void insertion_canonical_with_filewrite(char fname[6][100],int kmer_len,int thre
 		if(_test_canonical_(aBF,kmer_len,kmer,rev_kmer,k,&result)==0){ //result:-h(kmer)<h(rev_kmer)?return 0: return 1
 			if(result==0){		     
 				fprintf(fkmer,"%s\n",kmer); //insert() of robustbf for distinct
+				insertSmartBF(kBF1,kmer);
 				_set_(aBF,kmer_len,kmer,k);
 			}
 			else{
-				fprintf(fkmer,"%s\n",rev_kmer); //insert() of robustbf distinct
+				fprintf(fkmer,"%s\n",rev_kmer); 
+				insertSmartBF(kBF1,rev_kmer); //insert() of robustbf distinct
 				_set_(aBF,kmer_len,rev_kmer,k);
 			}
 		}
