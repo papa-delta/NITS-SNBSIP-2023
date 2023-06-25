@@ -1,8 +1,11 @@
 //-------might be redundant, might remove later
 #include <stdio.h> 
 #include <stdlib.h>
+#include <math.h>
 // ----------------------------------------------
 
+
+//-------------------- Common from 2dfilter.h and KmerCo.h-------------------------------
 
 static int x;
 static int y;
@@ -49,3 +52,36 @@ void _free_(unsigned long int **a)
 	free(a);
 	printf("\nMemory freed successfully...\n");
 }
+
+//-----------------------------------------------------------------------------------
+
+
+
+//-------------------- Common from initRBF.h and initCBF.h-------------------------------
+
+unsigned long int size=0;
+
+unsigned long int selectPrime(unsigned long int k)
+{
+	unsigned long int i;
+	for(i=1;i<total_prime;i++)
+	{
+		if(prime[i]>k)
+			return i;
+	}
+}
+
+double error(unsigned long int m, unsigned long int n)
+{
+	return pow((1-exp(-2*n/m)),2);
+}
+unsigned long int memory(unsigned long int n, double err)
+{
+	return (unsigned long int)(-(n*log(err))/pow(log(2),2));
+}
+unsigned long int number(unsigned long int m,double err)
+{
+	return (unsigned long int)(-(m*pow(log(2),2))/log(err));
+}
+
+//-----------------------------------------------------------------------------------

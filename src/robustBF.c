@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <time.h>
 #include <string.h>
-#include <math.h>
+
 #include "prime.h"
+#include "common.h"
 #include "murmur.h"
 #include "2dfilter.h"
 #include "initRBF.h"
@@ -54,7 +56,7 @@ int main()
 	FILE *f=fopen("10M_r.txt","w");
 	clock_t start, end;
 	printf("File initiated!\n");	
-	initSeed();
+	//initSeed(); - commented because it is no longer defined!
 	printf("Seeds initiated!\n");
 	m=memory(n,err);
 	printf("Memory initiated!\n");

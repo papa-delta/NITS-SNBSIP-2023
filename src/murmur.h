@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-unsigned int murmur2 ( const void * key, int len, unsigned int seed )
+unsigned int murmur2 ( const void * key, int len, unsigned int seedInput )
 {
 	// 'm' and 'r' are mixing constants generated offline.
 	// They're not really 'magic', they just happen to work well.
@@ -11,7 +11,7 @@ unsigned int murmur2 ( const void * key, int len, unsigned int seed )
 
 	// Initialize the hash to a 'random' value
 
-	unsigned int h = seed ^ len;
+	unsigned int h = seedInput ^ len;
 
 	// Mix 4 bytes at a time into the hash
 

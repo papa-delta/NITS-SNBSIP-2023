@@ -1,5 +1,7 @@
 
-unsigned long int size=0;
+//All moved to common.h
+
+/*unsigned long int size=0;
 
 unsigned long int selectPrime(unsigned long int k)
 {
@@ -22,7 +24,10 @@ unsigned long int memory(unsigned long int n, double err)
 unsigned long int number(unsigned long int m,double err)
 {
 	return (unsigned long int)(-(m*pow(log(2),2))/log(err));
-}
+}*/
+
+
+#include "common.h"
 
 void setDim(unsigned long int m)
 {

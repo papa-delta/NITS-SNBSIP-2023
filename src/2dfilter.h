@@ -13,7 +13,7 @@
 //static int x,y; - commented because redundant
 
 
-#include "common.h"
+//#include "common.h"
 
 static int bits=61;
 

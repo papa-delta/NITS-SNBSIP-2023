@@ -1,5 +1,7 @@
 
-unsigned long int size=0;
+//All moved to common.h
+
+/*unsigned long int size=0;
 static int seed1, seed2,seed3,seed4,seed5;//,seed6, seed7, seed8,seed9,seed10;
 //static int seed11, seed12,seed13,seed14,seed15,seed16, seed17, seed18,seed19,seed20;
 unsigned long int selectPrime(unsigned long int k)
@@ -33,7 +35,7 @@ void initSeed()
 	seed17=prime[8801];
 	seed18=prime[1701];
 	seed19=prime[1801];
-	seed20=prime[5901];*/
+	seed20=prime[5901];
 }
 
 double error(unsigned long int m, unsigned long int n)
@@ -48,6 +50,9 @@ unsigned long int number(unsigned long int m,double err)
 {
 	return (unsigned long int)(-(m*pow(log(2),2))/log(err));
 }
+*/
+
+//#include "common.h"
 
 void setDim(unsigned long int m)
 {
