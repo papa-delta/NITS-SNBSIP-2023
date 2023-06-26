@@ -3,7 +3,9 @@
 #include <time.h>
 #include <string.h>
 #include <math.h>
+
 #include "prime.h"
+#include "common.h"
 #include "KmerCo.h" //KmerCo header file
 #include "initCBF.h"
 #include <sys/mman.h>

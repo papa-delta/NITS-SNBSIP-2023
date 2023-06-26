@@ -27,7 +27,7 @@ unsigned long int number(unsigned long int m,double err)
 }*/
 
 
-#include "common.h"
+//#include "common.h"
 
 void setDim(unsigned long int m)
 {

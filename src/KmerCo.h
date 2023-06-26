@@ -8,7 +8,6 @@
 //#include "mask/mask12.h"
 //#include "mask/mask14.h"
 //#include "mask/mask16.h"
-#include "common.h"
 #include "murmur.h"
 
 //#include "initCBF.h" - commented out initially
