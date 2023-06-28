@@ -14,6 +14,10 @@
 static unsigned long int TP=0,TN=0,FP=0;
 
 unsigned long int **aBF;
+unsigned long int **distinct_rBF;
+unsigned long int **trustworthy_rBF;
+unsigned long int **erroneous_rBF;
+
 
 //#### Insertion without file writing (Canonical) ##########
 void insertion_canonical_without_filewrite(char fname[6][100],int kmer_len,int threshold, int k){
