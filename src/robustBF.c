@@ -111,7 +111,7 @@ int main()
 	printf("Seeds initiated!\n");
 	m=memory(n,err);
 	printf("Memory initiated!\n");
-	setDim(m);
+	setDim_rBF(m);
 	printf("Dimensions initiated!\n");
 	kBF=allocate();
 	printf("Filters are created!\n");

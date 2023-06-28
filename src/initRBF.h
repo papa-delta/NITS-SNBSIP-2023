@@ -54,7 +54,7 @@ unsigned long int number(unsigned long int m,double err)
 
 //#include "common.h"
 
-void setDim(unsigned long int m)
+void setDim_rBF(unsigned long int m)
 {
 	unsigned long int k=m/(2*64); 
 	int a,b,c,d,e,f;

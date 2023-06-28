@@ -17,7 +17,7 @@
 
 static int bits=61;
 
-void _set_(unsigned long int **a,unsigned long int h)
+void _setrBF_(unsigned long int **a,unsigned long int h)
 {
 	int i,j,pos;
 	i=h%x;
@@ -27,7 +27,7 @@ void _set_(unsigned long int **a,unsigned long int h)
 }
 
 
-int _test_(unsigned long int **a,unsigned long int h)
+int _testrBF_(unsigned long int **a,unsigned long int h)
 {
 	int i,j,pos;
 	int flag;
