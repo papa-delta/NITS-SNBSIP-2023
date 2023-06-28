@@ -1,15 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/mman.h>
+#include <fcntl.h> 
+#include <unistd.h>
 #include <time.h>
 #include <string.h>
 #include <math.h>
 
 #include "prime.h"
+#include "murmur.h"
 #include "common.h"
 #include "KmerCo.h" //KmerCo header file
 #include "initCBF.h"
-#include <sys/mman.h>
-#include<fcntl.h>
+#include "2dfilter.h"
+#include "initRBF.h"
+#include "keyBF.h"
+
 
 static unsigned long int TP=0,TN=0,FP=0;
 
@@ -170,13 +176,21 @@ void insertion_canonical_with_filewrite(char fname[6][100],int kmer_len,int thre
 	printf("File initiated!\n");	// Filter construction
 	
 	//CONSTRUCT RBF
+
+
+
 	
 	int mem=(int)(total_kmers);
 	m=memory(mem,err);
 	printf("Memory initiated!\n");
-	setDim(m);
+	setDim(m); // WHICH setDim() to use for which BFs?
 	printf("Dimensions initiated!\n");
 	aBF=allocate();
+	
+	distinct_rBF = allocate();
+	trustworthy_rBF=allocate();
+	erroneous_rBF=allocate();
+	
 	printf("Filters are created!\n");
 
     char* buff = mmap(NULL, fileLength, PROT_READ, MAP_SHARED, f, 0); //Map its contents into memory.
@@ -230,10 +244,12 @@ void insertion_canonical_with_filewrite(char fname[6][100],int kmer_len,int thre
 		if(_test_canonical_(aBF,kmer_len,kmer,rev_kmer,k,&result)==0){ //result:-h(kmer)<h(rev_kmer)?return 0: return 1
 			if(result==0){		     
 				fprintf(fkmer,"%s\n",kmer); //insert() of robustbf for distinct
+				insert_keyBF(distinct_rBF,kmer,kmer_len);
 				_set_(aBF,kmer_len,kmer,k);
 			}
 			else{
 				fprintf(fkmer,"%s\n",rev_kmer); //insert() of robustbf distinct
+				insert_keyBF(distinct_rBF,rev_kmer,kmer_len);
 				_set_(aBF,kmer_len,rev_kmer,k);
 			}
 		}
@@ -291,10 +307,23 @@ void insertion_canonical_with_filewrite(char fname[6][100],int kmer_len,int thre
 	start=clock(); //Starting clock
 	while(!feof(fkmer)){	
 		
-		if (_test_(aBF,kmer_len,kmer,k)>threshold)
+		if (_test_(aBF,kmer_len,kmer,k)>threshold){
 			fprintf(ftrust,"%s\n",kmer); //insert() of robutBF for thrustworthy
-		else
+			insert_keyBF(trustworthy_rBF,kmer,kmer_len);
+			// printf("%s inserted\n",kmer);
+			// if(lookup_keyBF(trustworthy_rBF,kmer,kmer_len)){
+			// 	printf("%s Found\n",kmer);
+			// };
+		}
+		else{
 			fprintf(ferror,"%s\n",kmer); ////insert() of robutBF for erroneous
+			insert_keyBF(erroneous_rBF,kmer,kmer_len);
+			// printf("%s inserted\n",kmer);
+			// if(lookup_keyBF(erroneous_rBF,kmer,kmer_len)){
+			// 	printf("%s Found\n",kmer);
+			// };
+
+		}
 		fscanf(fkmer,"%s",kmer);
 		count++;
 	}
@@ -375,8 +404,11 @@ int main(int argc, char* argv[])
     // printf("threshold= %d\n",threshold);
     // printf("k= %d\n",k);
 
-	insertion_canonical_without_filewrite(fname,kmer_len,threshold,k); //Canonical
+	// insertion_canonical_without_filewrite(fname,kmer_len,threshold,k); //Canonical - MIGHT BRING IT BACK LATER!!!
 	insertion_canonical_with_filewrite(fname,kmer_len,threshold,k); //Canonical
+
+
+
 
 	return 0;
 }
