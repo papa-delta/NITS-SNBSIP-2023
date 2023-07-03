@@ -26,7 +26,7 @@ unsigned long int **erroneous_rBF;
 
 
 //#### Insertion without file writing (Canonical) ##########
-void insertion_canonical_without_filewrite(char fname[6][100],int kmer_len,int threshold, int k){
+void insertion_canonical_without_filewrite(char fname[5][100],int kmer_len,int threshold, int k){
 	int result,kcount=0,rcount=0;
     char ch,kmer[kmer_len+1],rev_kmer[kmer_len+1];	
 	double err=0.001;
@@ -140,7 +140,7 @@ void insertion_canonical_without_filewrite(char fname[6][100],int kmer_len,int t
 }	
 
 //#### Insertion with file writing (Canonical) ##########
-void insertion_canonical_with_filewrite(char fname[6][100],int kmer_len,int threshold, int k){
+void insertion_canonical_with_filewrite(char fname[5][100],int kmer_len,int threshold, int k){
 	int result,kcount=0,rcount=0;
     char ch,kmer[kmer_len+1],rev_kmer[kmer_len+1];
 	double err=0.001;
