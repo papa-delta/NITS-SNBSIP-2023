@@ -31,8 +31,12 @@
 *.out
 *.app
 
-#Very Large Files
+#Very Large Files or other files associated with program output (unnecessary)
 loxodonta.cor.fq
 Distinct.txt
 Errorneous.txt
-
+Result.txt
+Trustworthy.txt
+src/10M_r.txt
+sequence.txt
+src/linecount.txt
