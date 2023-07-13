@@ -43,3 +43,4 @@ src/linecount.txt
 src/NotFound.txt
 src/Found.txt
 src/Erroneous.txt
+src/Results/*
