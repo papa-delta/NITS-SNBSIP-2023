@@ -50,7 +50,7 @@ void ErrorCorrection(char *kmer){
 
 			if (LookupTrustworthyRBF(modifiedKmer)){
 				FILE *file = fopen("Found.txt", "a");
-				fprintf(file, "%s %d %c\n", modifiedKmer, i, letterReplaced);
+				fprintf(file, "%s %s %d %c\n", kmer, modifiedKmer, i, letterReplaced);
 				fclose(file);
 				return;
 			}
@@ -394,10 +394,12 @@ void insertion_canonical_with_filewrite(char fname[5][100],int kmer_len,int thre
 		else
 			fprintf(fres,"Total number of trustworthy kmers: %lld\n",(long long)fileLength+1); 
 	}
-	fclose(fres);
+
 
 	printf("Starting custom error correction algorithm now!\n");
-	
+	fprintf(fres,"\n\n########### Results of dataset %s error correction ############\n",fname[0]);
+	fprintf(fres,"Starting custom error correction algorithm now!\n");
+	start=clock();	
 	fkmer = fopen(fname[1], "r");
 	fscanf(fkmer,"%s",kmer);
 	while(!feof(fkmer)){	
@@ -412,17 +414,45 @@ void insertion_canonical_with_filewrite(char fname[5][100],int kmer_len,int thre
 	}
 	
 	fclose(fkmer);
-
+	end=clock();
 	printf("Error correction algorithm over!\n");
+	fprintf(fres,"Error correction algorithm over!\n");
+	printf("Elapsed Time of error correction:%f\n\n", (double)(end-start)/CLOCKS_PER_SEC);
+	fprintf(fres,"Elapsed Time of error correction:%f\n\n", (double)(end-start)/CLOCKS_PER_SEC);
 
 
+	fclose(fres);
+}
+
+
+void checkAndDeleteFiles(char filenames[6][100], int numFiles) {
+    for (int i = 0; i < numFiles; i++) {
+        const char* filename = filenames[i];
+
+        // Check if the file exists
+        if (access(filename, F_OK) == 0) {
+            printf("File '%s' exists.\n", filename);
+
+            // Delete the file
+            if (remove(filename) == 0) {
+                printf("File '%s' deleted successfully.\n", filename);
+            } else {
+                printf("Error deleting the file '%s'.\n", filename);
+            }
+        } 
+		// else {
+        //     printf("File '%s' does not exist.\n", filename);
+        // }
+    }
 }
 
 int main(int argc, char* argv[]){
 	
 	//Parameters 
     int kmer_len, threshold, k; //kmer_len: Length of the kmer, k:No. of hash functions
+	
     char fname[5][100]={"0","Distinct.txt","Erroneous.txt","Trustworthy.txt","Result.txt"};
+	char files[6][100]={"Distinct.txt","Erroneous.txt","Trustworthy.txt","Result.txt","Found.txt","NotFound.txt"};
     char* parameter[]={"-K","-eta","-h"};
 
     if(argc==2){
@@ -458,6 +488,8 @@ int main(int argc, char* argv[]){
     // printf("kmer_len= %d\n",kmer_len);
     // printf("threshold= %d\n",threshold);
     // printf("k= %d\n",k);
+
+	checkAndDeleteFiles(files,6);
 
 	// insertion_canonical_without_filewrite(fname,kmer_len,threshold,k); //Canonical - MIGHT BRING IT BACK LATER!!!
 	insertion_canonical_with_filewrite(fname,kmer_len,threshold,k); //Canonical
