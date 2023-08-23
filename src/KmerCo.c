@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <sys/mman.h>
 #include <fcntl.h> 
 #include <unistd.h>
@@ -23,6 +24,43 @@ unsigned long int **aBF;
 unsigned long int **distinct_rBF;
 unsigned long int **trustworthy_rBF;
 unsigned long int **erroneous_rBF;
+
+
+bool LookupTrustworthyRBF(char *kmer){
+	if (lookup_keyBF(trustworthy_rBF, kmer, 28)){
+		return true;
+	}
+	return false;
+}
+
+void replaceOne(char *string, int index, char letter){
+	string[index] = letter;
+}
+
+void ErrorCorrection(char *kmer){
+	const char letters[] = "ATGC";
+	int kmer_length = strlen(kmer);
+
+	for (int i = 0; i < kmer_length; i++){
+		for (int j = 0; j < sizeof(letters) - 1; j++){
+			char modifiedKmer[28]; // Assuming a maximum kmer length of 100
+			strcpy(modifiedKmer, kmer);
+			char letterReplaced = modifiedKmer[i];
+			replaceOne(modifiedKmer, i, letters[j]);
+
+			if (LookupTrustworthyRBF(modifiedKmer)){
+				FILE *file = fopen("Found.txt", "a");
+				fprintf(file, "%s %s %d %c\n", kmer, modifiedKmer, i, letterReplaced);
+				fclose(file);
+				return;
+			}
+		}
+	}
+
+	FILE *file = fopen("NotFound.txt", "a");
+	fprintf(file, "%s\n", kmer);
+	fclose(file);
+}
 
 
 //#### Insertion without file writing (Canonical) ##########
@@ -177,9 +215,6 @@ void insertion_canonical_with_filewrite(char fname[5][100],int kmer_len,int thre
 	
 	//CONSTRUCT RBF
 
-
-
-	
 	int mem=(int)(total_kmers);
 	m=memory(mem,err);
 	printf("Memory initiated!\n");
@@ -359,15 +394,65 @@ void insertion_canonical_with_filewrite(char fname[5][100],int kmer_len,int thre
 		else
 			fprintf(fres,"Total number of trustworthy kmers: %lld\n",(long long)fileLength+1); 
 	}
-	fclose(fres);
 
+
+	printf("Starting custom error correction algorithm now!\n");
+	fprintf(fres,"\n\n########### Results of dataset %s error correction ############\n",fname[0]);
+	fprintf(fres,"Starting custom error correction algorithm now!\n");
+	start=clock();	
+	fkmer = fopen(fname[1], "r");
+	fscanf(fkmer,"%s",kmer);
+	while(!feof(fkmer)){	
+		
+		if (_test_(aBF,kmer_len,kmer,k)<=threshold){
+			
+			ErrorCorrection(kmer);
+
+		}
+		fscanf(fkmer,"%s",kmer);
+
+	}
+	
+	fclose(fkmer);
+	end=clock();
+	printf("Error correction algorithm over!\n");
+	fprintf(fres,"Error correction algorithm over!\n");
+	printf("Elapsed Time of error correction:%f\n\n", (double)(end-start)/CLOCKS_PER_SEC);
+	fprintf(fres,"Elapsed Time of error correction:%f\n\n", (double)(end-start)/CLOCKS_PER_SEC);
+
+
+	fclose(fres);
 }
 
-int main(int argc, char* argv[])
-{
+
+void checkAndDeleteFiles(char filenames[6][100], int numFiles) {
+    for (int i = 0; i < numFiles; i++) {
+        const char* filename = filenames[i];
+
+        // Check if the file exists
+        if (access(filename, F_OK) == 0) {
+            printf("File '%s' exists.\n", filename);
+
+            // Delete the file
+            if (remove(filename) == 0) {
+                printf("File '%s' deleted successfully.\n", filename);
+            } else {
+                printf("Error deleting the file '%s'.\n", filename);
+            }
+        } 
+		// else {
+        //     printf("File '%s' does not exist.\n", filename);
+        // }
+    }
+}
+
+int main(int argc, char* argv[]){
+	
 	//Parameters 
     int kmer_len, threshold, k; //kmer_len: Length of the kmer, k:No. of hash functions
-    char fname[5][100]={"0","Distinct.txt","Errorneous.txt","Trustworthy.txt","Result.txt"};
+	
+    char fname[5][100]={"0","Distinct.txt","Erroneous.txt","Trustworthy.txt","Result.txt"};
+	char files[6][100]={"Distinct.txt","Erroneous.txt","Trustworthy.txt","Result.txt","Found.txt","NotFound.txt"};
     char* parameter[]={"-K","-eta","-h"};
 
     if(argc==2){
@@ -404,11 +489,20 @@ int main(int argc, char* argv[])
     // printf("threshold= %d\n",threshold);
     // printf("k= %d\n",k);
 
+	checkAndDeleteFiles(files,6);
+
 	// insertion_canonical_without_filewrite(fname,kmer_len,threshold,k); //Canonical - MIGHT BRING IT BACK LATER!!!
 	insertion_canonical_with_filewrite(fname,kmer_len,threshold,k); //Canonical
 
+	// FILE* tester = fopen("Errorneous.txt", "r");
+	// 	char kmer[28]; // Assuming a maximum kmer length of 100
 
+	// while (fgets(kmer, sizeof(kmer), tester)) {
+	//     kmer[strcspn(kmer, "\n")] = '\0'; // Remove trailing newline character
+	//     ErrorCorrection(kmer);
+	// }
 
+	// fclose(tester);
 
 	return 0;
 }

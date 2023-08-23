@@ -42,7 +42,7 @@ unsigned long int **allocate()
 	for(i=0;i<x;i++)
 		for(j=0;j<y;j++)
 			a[i][j]=0;
-	printf("\nAllocated and Initilized 2DBF Successfully...\n");
+	printf("\nAllocated and Initialized 2DBF Successfully...\n");
 	return a;
 }
 
