@@ -2,7 +2,7 @@
 
 # Check if both path1 and path2 are provided as arguments
 if [ $# -ne 2 ]; then
-  echo "Usage: $0 path1 path2"
+  echo "Usage: $0 path1 path2; where path1 is the absolute path to the KmerCo folder (containing KmerCo.c), and path2 is the absolute path to the folder containing the extracted sequences from the datasets in .txt format."
   exit 1
 fi
 
