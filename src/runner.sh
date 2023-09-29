@@ -2,7 +2,7 @@
 
 # Check if both path1 and path2 are provided as arguments
 if [ $# -ne 2 ]; then
-  echo "Usage: $0 path1 path2; where path1 is the absolute path to the KmerCo folder (containing KmerCo.c), and path2 is the absolute path to the folder containing the extracted sequences from the datasets in .txt format."
+  echo "Usage: $0 path1 path2; where path1 is the absolute path to the repository folder (containing main.c), and path2 is the absolute path to the folder containing the extracted sequences from the datasets in .txt format."
   exit 1
 fi
 
@@ -12,8 +12,8 @@ path2=$2
 
 mkdir ${path1}/Results
 
-# Compile KmerCo.c
-gcc "${path1}/KmerCo.c" -o "${path1}/KmerCo.out" -lm
+# Compile main.c
+gcc "${path1}/main.c" -o "${path1}/main.out" -lm
 
 # Check if the compilation was successful
 if [ $? -ne 0 ]; then
@@ -25,8 +25,8 @@ fi
 for file in "${path2}"/*.txt; do
   # Extract the filename without the extension
   filenamebase=$(basename "$file" .txt)
-  # Run KmerCo with the current filename.txt
-  ${path1}/KmerCo.out ${path2}/$filenamebase.txt
+  # Run error correction with the current filename.txt
+  ${path1}/main.out ${path2}/$filenamebase.txt
 	
 # Define an array of filenames
 filenames=("linecount" "Distinct" "Erroneous" "Trustworthy" "Result" "Found" "NotFound")
