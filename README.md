@@ -62,6 +62,6 @@ and faculties.
 
 ### Authors:
 
-- Preetodeep Dev, B.Tech (CSE), Assam University, Silchar.
+- [Preetodeep Dev](https://github.com/papa-delta/), B.Tech (CSE), Assam University, Silchar.
   
-- Swayampakula Kedharnath, B.Tech (CSE), National Institute of Technology, Silchar.
+- [Swayampakula Kedharnath](https://github.com/SWAYAMPAKULA-KEDHARNATH), B.Tech (CSE), National Institute of Technology, Silchar.
