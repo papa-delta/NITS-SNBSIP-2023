@@ -54,14 +54,17 @@ List of references, resources, and research materials we used for the project ar
 - [Github repository of KmerCo](https://github.com/patgiri/KmerCo-Main),  a lightweight k-mer counting technique with a tiny memory footprint
 - [Github repository of CountBF](https://github.com/patgiri/KmerCo-Main),  a lightweight k-mer counting technique with a tiny memory footprint
 
+**Note:** The papers that we've put inside the `"Papers"` directory of this repository have been taken directly from the aforementioned links, and have been put in here only for reference. All credits for those papers belong to the respective authors and publishers.
 
 ### Acknowledgements: 
 
-We thank and acknowledge our guide, Dr. Ripon Patgiri, and supervisor, Ms. Sabuzima Nayak, for supporting and guiding us during the internship. We also acknowledge and thank everyone associated with the Satyendranath Bose Summer Internship at the Department of CSE, NIT Silchar, including the relevant authorities
-and faculties.
+We thank and acknowledge our guide and mentor, Dr. Ripon Patgiri, and supervisor, Ms. Sabuzima Nayak, for supporting and guiding us during the internship. We also acknowledge and thank everyone associated with the Satyendranath Bose Summer Internship at the Department of CSE, NIT Silchar, including the relevant authorities and faculties.
+
+
 
 ### Authors:
 
 - [Preetodeep Dev](https://github.com/papa-delta/), B.Tech (CSE), Assam University, Silchar.
   
 - [Swayampakula Kedharnath](https://github.com/SWAYAMPAKULA-KEDHARNATH), B.Tech (CSE), National Institute of Technology, Silchar.
+
